@@ -1,8 +1,15 @@
 import { Text, TextProps, View } from "./Themed";
-import { Platform, StyleSheet, Image, Pressable } from "react-native";
+import {
+	Platform,
+	StyleSheet,
+	Image,
+	ImageBackground,
+	Pressable,
+} from "react-native";
 import Images from "../assets/images/images";
 import { DwarfData } from "../utils/gameLogic";
 import { useRouter } from "expo-router";
+import DwarfPortrait from "./DwarfPortrait";
 
 const DwarfTile = ({ dwarfData }: { dwarfData: DwarfData }) => {
 	const router = useRouter();
@@ -15,23 +22,10 @@ const DwarfTile = ({ dwarfData }: { dwarfData: DwarfData }) => {
 
 	return (
 		<Pressable onPress={onPressFunction}>
-			<Image style={styles.image} source={Images.icon} />
+			<DwarfPortrait dwarfData={dwarfData} size={64}></DwarfPortrait>
 			<Text>{dwarfData.name}</Text>
 		</Pressable>
 	);
 };
-
-const styles = StyleSheet.create({
-	image: {
-		// flex: 1,
-		width: 64,
-		height: 64,
-		margin: 8,
-		//resizeMode: "contain",
-	},
-	// pressable: {
-	// 	flex: 1,
-	// },
-});
 
 export default DwarfTile;

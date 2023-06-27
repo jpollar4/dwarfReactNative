@@ -23,6 +23,7 @@ export default function PrepareExpedition() {
 
 	useEffect(() => {
 		(async () => {
+			await clearGameData();
 			const currentGame = await getData("currentGame");
 
 			if (!currentGame) {

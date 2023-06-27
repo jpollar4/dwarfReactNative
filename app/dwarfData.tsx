@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, ImageBackground } from "react-native";
 
 import { Text, View } from "../components/Themed";
 import { useNavigation, useRouter, useLocalSearchParams } from "expo-router";
 import { DwarfData, getDwarfByID } from "../utils/gameLogic";
+import DwarfPortrait from "../components/DwarfPortrait";
+import Images from "../assets/images/images";
 
 export default function DwarfInfoScreen() {
 	const navigation = useNavigation();
@@ -22,6 +24,9 @@ export default function DwarfInfoScreen() {
 
 	return (
 		<View style={styles.container}>
+			{dwarfData && (
+				<DwarfPortrait dwarfData={dwarfData} size={128}></DwarfPortrait>
+			)}
 			<Text style={styles.title}>{dwarfData?.name}</Text>
 			<Text style={styles.title}>
 				{dwarfData?.awaitingExpedition ? "Awaiting" : "Gone"}
@@ -42,6 +47,13 @@ const styles = StyleSheet.create({
 		width: "100%",
 		height: "20%",
 		justifyContent: "center",
+	},
+	image: {
+		// flex: 1,
+		width: 128,
+		height: 128,
+		// margin: 8,
+		//resizeMode: "contain",
 	},
 	title: {
 		fontSize: 20,

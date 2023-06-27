@@ -5,6 +5,9 @@ export interface DwarfData {
 	awaitingExpedition: boolean;
 	id: number;
 	name: string;
+	eyeVariation: number;
+	headVariation: number;
+	beardVariation: number;
 }
 
 // In MemoryData
@@ -40,7 +43,10 @@ const generateNewDwarf = async () => {
 	const dwarf: DwarfData = {
 		id: id,
 		awaitingExpedition: true,
-		name: "Steve_" + `${id}`,
+		name: generateName(),
+		eyeVariation: Math.ceil(Math.random() * 4),
+		headVariation: Math.ceil(Math.random() * 4),
+		beardVariation: Math.ceil(Math.random() * 4),
 	};
 
 	const key = `dwarfData_${id}`;
@@ -88,4 +94,93 @@ const getNextID = async () => {
 	nextID += 1;
 	await storeObject("nextID", { nextID });
 	return nextID;
+};
+
+const generateName = () => {
+	const name_parts = {
+		prefixes: [
+			"Bal",
+			"Dain",
+			"Dur",
+			"Gim",
+			"Thra",
+			"Thor",
+			"Aza",
+			"Ki",
+			"Fi",
+			"Glo",
+			"Oi",
+			"Nor",
+			"Do",
+			"O",
+			"Bi",
+			"Bo",
+			"Bom",
+			"Fló",
+			"Fre",
+			"Fra",
+			"Fro",
+			"Gro",
+			"Ná",
+			"Ná",
+			"Na",
+			"Nó",
+			"Thr",
+			"Ví",
+			"Kaz",
+			"Zir",
+			"Kor",
+			"Bor",
+			"Thur",
+			"Zar",
+			"Mar",
+			"Rur",
+			"Tur",
+			"Ulf",
+		],
+		suffixes: [
+			"lin",
+			"rin",
+			"in",
+			"li",
+			"rin",
+			"in",
+			"ghâl",
+			"li",
+			"li",
+			"in",
+			"in",
+			"ri",
+			"ri",
+			"ri",
+			"fur",
+			"fur",
+			"bur",
+			"i",
+			"in",
+			"ar",
+			"di",
+			"or",
+			"in",
+			"i",
+			"i",
+			"i",
+			"ór",
+			"li",
+			"ak",
+			"ur",
+			"in",
+			"in",
+			"gul",
+			"in",
+			"ak",
+			"uk",
+			"ir",
+			"grim",
+		],
+	};
+
+	const prefixIndex = Math.floor(Math.random() * name_parts.prefixes.length);
+	const suffixIndex = Math.floor(Math.random() * name_parts.suffixes.length);
+	return `${name_parts.prefixes[prefixIndex]}${name_parts.suffixes[suffixIndex]}`;
 };
